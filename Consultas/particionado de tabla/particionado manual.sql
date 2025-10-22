@@ -104,7 +104,7 @@ END $$;
 ALTER TABLE eventos_particionado SET LOGGED;
 
 
--- 7. ejecutar analyze sobre la tabla particionada al final todo el cargue, este demorara segun la cantidad de datos que tenga la tabla
+-- 7. ejecutar analyze para optimizar la tabla particionada al final todo el cargue, este demorara segun la cantidad de datos que tenga la tabla
 ANALYZE eventos_particionado;
 
 
