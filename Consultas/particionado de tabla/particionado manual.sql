@@ -108,9 +108,14 @@ ALTER TABLE eventos_particionado SET LOGGED;
 ANALYZE eventos_particionado;
 
 
--- 8. por ultimo validar los datos migrados conincida con el conteo inicial
+-- 8. validar los datos migrados conincida con el conteo inicial
 SELECT to_char(date_trunc('month', fecha_insercion), 'YYYY-MM') AS mes ,date_trunc('month', fecha_insercion) AS fecha_inicio
         ,(date_trunc('month', fecha_insercion) + interval '1 month') AS fecha_fin ,COUNT(*) AS cantidad
     FROM eventos_particionado
 GROUP BY 1, 2, 3
 ORDER BY fecha_inicio;
+
+
+-- 9. por ultimo renombrar tablas para empezar a usar la tabla particionada
+ALTER TABLE eventos RENAME TO eventos_old;
+ALTER TABLE eventos_particionado RENAME TO eventos;
